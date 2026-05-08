@@ -1,2 +1,4 @@
 .venv/
 .soft_archmap/
+
+*.egg-info/
