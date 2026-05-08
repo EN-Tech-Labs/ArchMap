@@ -84,7 +84,7 @@ dev = [
 ]
 
 [project.scripts]
-archmap-python = "soft_archmap.cli:main"
+soft-archmap = "soft_archmap.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/EN-Tech-Labs/ArchMap"

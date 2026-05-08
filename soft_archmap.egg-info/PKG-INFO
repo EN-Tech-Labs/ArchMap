@@ -1,0 +1,91 @@
+Metadata-Version: 2.4
+Name: soft-archmap
+Version: 0.1.0
+Summary: Python tool to analyze architecture and dependencies in Python projects.
+Author-email: Excited Nuclei Tech Labs <excitednuclei.techlabs@gmail.com>
+Project-URL: Homepage, https://github.com/EN-Tech-Labs/ArchMap
+Project-URL: Repository, https://github.com/EN-Tech-Labs/ArchMap
+Project-URL: Documentation, https://github.com/EN-Tech-Labs/ArchMap
+Keywords: architecture,dependency,python,analysis
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Classifier: License :: Other/Proprietary License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: graphviz>=0.21
+Requires-Dist: networkx>=3.6.1
+Requires-Dist: pyvis>=0.3.2
+Requires-Dist: rich>=15.0.0
+Requires-Dist: requests>=2.33.1
+Provides-Extra: dev
+Requires-Dist: asttokens==3.0.1; extra == "dev"
+Requires-Dist: build==1.5.0; extra == "dev"
+Requires-Dist: certifi==2026.4.22; extra == "dev"
+Requires-Dist: charset-normalizer==3.4.7; extra == "dev"
+Requires-Dist: colorama==0.4.6; extra == "dev"
+Requires-Dist: comm==0.2.3; extra == "dev"
+Requires-Dist: debugpy==1.8.20; extra == "dev"
+Requires-Dist: decorator==5.2.1; extra == "dev"
+Requires-Dist: docutils==0.22.4; extra == "dev"
+Requires-Dist: executing==2.2.1; extra == "dev"
+Requires-Dist: id==1.6.1; extra == "dev"
+Requires-Dist: idna==3.13; extra == "dev"
+Requires-Dist: ipykernel==7.2.0; extra == "dev"
+Requires-Dist: ipython==9.13.0; extra == "dev"
+Requires-Dist: ipython_pygments_lexers==1.1.1; extra == "dev"
+Requires-Dist: jaraco.classes==3.4.0; extra == "dev"
+Requires-Dist: jaraco.context==6.1.2; extra == "dev"
+Requires-Dist: jaraco.functools==4.4.0; extra == "dev"
+Requires-Dist: jedi==0.19.2; extra == "dev"
+Requires-Dist: Jinja2==3.1.6; extra == "dev"
+Requires-Dist: jsonpickle==4.1.1; extra == "dev"
+Requires-Dist: jupyter_client==8.8.0; extra == "dev"
+Requires-Dist: jupyter_core==5.9.1; extra == "dev"
+Requires-Dist: keyring==25.7.0; extra == "dev"
+Requires-Dist: markdown-it-py==4.0.0; extra == "dev"
+Requires-Dist: MarkupSafe==3.0.3; extra == "dev"
+Requires-Dist: matplotlib-inline==0.2.1; extra == "dev"
+Requires-Dist: mdurl==0.1.2; extra == "dev"
+Requires-Dist: more-itertools==11.0.2; extra == "dev"
+Requires-Dist: nest-asyncio==1.6.0; extra == "dev"
+Requires-Dist: nh3==0.3.5; extra == "dev"
+Requires-Dist: packaging==26.1; extra == "dev"
+Requires-Dist: parso==0.8.6; extra == "dev"
+Requires-Dist: platformdirs==4.9.6; extra == "dev"
+Requires-Dist: prompt_toolkit==3.0.52; extra == "dev"
+Requires-Dist: psutil==7.2.2; extra == "dev"
+Requires-Dist: pure_eval==0.2.3; extra == "dev"
+Requires-Dist: Pygments==2.20.0; extra == "dev"
+Requires-Dist: pyproject_hooks==1.2.0; extra == "dev"
+Requires-Dist: python-dateutil==2.9.0.post0; extra == "dev"
+Requires-Dist: pywin32-ctypes==0.2.3; extra == "dev"
+Requires-Dist: pyzmq==27.1.0; extra == "dev"
+Requires-Dist: readme_renderer==44.0; extra == "dev"
+Requires-Dist: requests-toolbelt==1.0.0; extra == "dev"
+Requires-Dist: rfc3986==2.0.0; extra == "dev"
+Requires-Dist: six==1.17.0; extra == "dev"
+Requires-Dist: stack-data==0.6.3; extra == "dev"
+Requires-Dist: tornado==6.5.5; extra == "dev"
+Requires-Dist: traitlets==5.14.3; extra == "dev"
+Requires-Dist: twine==6.2.0; extra == "dev"
+Requires-Dist: urllib3==2.6.3; extra == "dev"
+Requires-Dist: wcwidth==0.6.0; extra == "dev"
+Dynamic: license-file
+
+# ArchMap-Python
+
+ArchMap-Python is a CLI tool by **Excited Nuclei Tech Labs** for analyzing Python software architecture. It helps developers understand dependencies, detect cycles, measure module health, compute risk, and visualize the architecture.
+
+## Features
+
+- Dependency graph generation
+- Cycle detection
+- Health metrics
+- Risk scoring of modules/functions
+- Impact analysis
+- Graphviz visualization and JSON export
+
+## Installation
+
