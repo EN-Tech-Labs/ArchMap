@@ -1,5 +1,5 @@
 from collections import defaultdict, deque
-from archmap_python.core.graph import DependencyGraph
+from soft_archmap.core.graph import DependencyGraph
 
 class ImpactAnalyzer:
     def __init__(self, model):

@@ -1,5 +1,5 @@
 # analysis/cycles.py
-from archmap_python.core.graph import DependencyGraph
+from soft_archmap.core.graph import DependencyGraph
 
 def detect_cycles(model):
     """

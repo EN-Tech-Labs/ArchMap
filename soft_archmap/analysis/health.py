@@ -1,5 +1,5 @@
 # analysis/health.py
-from archmap_python.core.graph import DependencyGraph
+from soft_archmap.core.graph import DependencyGraph
 
 def compute_health(model):
     """

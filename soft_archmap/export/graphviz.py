@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict
-from archmap_python.core.model import ArchitectureModel
+from soft_archmap.core.model import ArchitectureModel
 
 def sanitize_id(value: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_]", "_", value)

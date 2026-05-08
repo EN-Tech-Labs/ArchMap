@@ -1,5 +1,5 @@
 import json
-from archmap_python.core.model import ArchitectureModel
+from soft_archmap.core.model import ArchitectureModel
 
 def export_json(model, path="architecture.json"):
     """

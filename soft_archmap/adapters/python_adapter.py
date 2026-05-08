@@ -1,6 +1,6 @@
 import ast
 import os
-from archmap_python.core.model import Entity, Relation
+from soft_archmap.core.model import Entity, Relation
 
 class PythonParser:
     def __init__(self, repo_path: str, model):

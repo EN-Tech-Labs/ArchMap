@@ -1,16 +1,16 @@
 import os
 import sys
 
-from archmap_python.core.model import ArchitectureModel
-from archmap_python.adapters.python_adapter import PythonParser
-from archmap_python.export.graphviz import export_graphviz
-from archmap_python.export.json_export import export_json
-from archmap_python.analysis.cycles import detect_cycles
-from archmap_python.analysis.health import compute_health
-from archmap_python.analysis.metrics import compute_metrics
-from archmap_python.analysis.impact import ImpactAnalyzer
-from archmap_python.analysis.risk import RiskEngine
-from archmap_python.analysis.top_risk import TopRiskAnalyzer
+from soft_archmap.core.model import ArchitectureModel
+from soft_archmap.adapters.python_adapter import PythonParser
+from soft_archmap.export.graphviz import export_graphviz
+from soft_archmap.export.json_export import export_json
+from soft_archmap.analysis.cycles import detect_cycles
+from soft_archmap.analysis.health import compute_health
+from soft_archmap.analysis.metrics import compute_metrics
+from soft_archmap.analysis.impact import ImpactAnalyzer
+from soft_archmap.analysis.risk import RiskEngine
+from soft_archmap.analysis.top_risk import TopRiskAnalyzer
 
 
 class CLI:
@@ -84,7 +84,7 @@ class CLI:
                     parser.parse_file(file_path)
 
         # Ensure we have a dependency graph
-        from archmap_python.core.graph import DependencyGraph
+        from soft_archmap.core.graph import DependencyGraph
         if not hasattr(self.model, "graph") or self.model.graph is None:
             self.model.graph = DependencyGraph()
             self.model.graph.build_from_model(self.model)
@@ -197,10 +197,10 @@ class CLI:
     def help(self):
         print("""
 Usage:
-  archmap analyze <repo_path>
-  archmap impact <repo_path> <node>
-  archmap report <repo_path>              -----> not yet available
-  archmap top-risk <repo_path>
+  soft-archmap analyze <repo_path>
+  soft-archmap impact <repo_path> <node>
+  soft-archmap report <repo_path>              -----> not yet available
+  soft-archmap top-risk <repo_path>
         """)
 
 def main():

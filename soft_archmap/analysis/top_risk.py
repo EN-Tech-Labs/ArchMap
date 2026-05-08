@@ -1,4 +1,4 @@
-from archmap_python.analysis.risk import RiskEngine
+from soft_archmap.analysis.risk import RiskEngine
 
 
 # class TopRiskAnalyzer:

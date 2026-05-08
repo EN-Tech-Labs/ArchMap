@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "archmap"          # must be lowercase, use '-' not '_'
+name = "soft-archmap"          # must be lowercase, use '-' not '_'
 version = "0.1.0"
 description = "Python tool to analyze architecture and dependencies in Python projects."
 readme = "README.md"             # include README on PyPI
@@ -84,7 +84,7 @@ dev = [
 ]
 
 [project.scripts]
-archmap-python = "archmap_python.cli:main"
+archmap-python = "soft_archmap.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/EN-Tech-Labs/ArchMap"
