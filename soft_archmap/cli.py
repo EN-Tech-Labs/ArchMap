@@ -1,6 +1,6 @@
 import os
 import sys
-
+VERSION = "0.1.0"
 from soft_archmap.core.model import ArchitectureModel
 from soft_archmap.adapters.python_adapter import PythonParser
 from soft_archmap.export.graphviz import export_graphviz
@@ -28,6 +28,15 @@ class CLI:
     # ENTRY POINT
     # -------------------------
     def run(self):
+        # Global flags
+        if self.command in ["--help", "-h"]:
+            self.help()
+            return
+
+        if self.command in ["--version", "-v"]:
+            self.version()
+            return
+
         if not self.command:
             self.help()
             return
@@ -84,7 +93,9 @@ class CLI:
                     parser.parse_file(file_path)
 
         # Ensure we have a dependency graph
+
         from soft_archmap.core.graph import DependencyGraph
+        
         if not hasattr(self.model, "graph") or self.model.graph is None:
             self.model.graph = DependencyGraph()
             self.model.graph.build_from_model(self.model)
@@ -195,29 +206,44 @@ class CLI:
                 print("Invalid path. Try again.")
 
     def help(self):
-        print("""
-Usage:
-  soft-archmap analyze <repo_path>
-  soft-archmap impact <repo_path> <node>
-  soft-archmap report <repo_path>              -----> not yet available
-  soft-archmap top-risk <repo_path>
-        """)
+        print(f"""
+    Soft ArchMap v{VERSION}
+
+    Usage:
+    soft-archmap analyze <repo_path>
+    soft-archmap impact <repo_path> <node>
+    soft-archmap report <repo_path>      (coming soon)
+    soft-archmap top-risk <repo_path>
+
+    Global Options:
+    -h, --help       Show help
+    -v, --version    Show version
+
+    Examples:
+    soft-archmap analyze ./my_repo
+    soft-archmap impact ./my_repo UserService
+    """)
+
+    def version(self):
+        print(f"Soft ArchMap v{VERSION}")
 
 def main():
-    # Display welcome message and contact info
-    border = '\n' + '=' * 100 + '\n'
-    lines = [
-        border,
-        "You are using ArchMap-Python by Excited Nuclei Tech Labs",
-        "For feedback, please email: excitednuclei.techlabs@gmail.com",
-        border
-    ]
 
-    # Print each line centered in a terminal width of 100
-    for line in lines:
-        print(line.center(100))
+    command = sys.argv[1] if len(sys.argv) > 1 else None
 
-    # Run the command-line interface
+    # Minimal output for global flags
+    if command not in ["--help", "-h", "--version", "-v"]:
+        border = '\n' + '=' * 100 + '\n'
+        lines = [
+            border,
+            f"Soft ArchMap v{VERSION} by Excited Nuclei Tech Labs",
+            "Feedback & Support:",
+            "mailto:excitednuclei.techlabs@gmail.com",
+            border]
+
+        for line in lines:
+            print(line.center(100))
+
     CLI().run()
 
 if __name__ == "__main__":
