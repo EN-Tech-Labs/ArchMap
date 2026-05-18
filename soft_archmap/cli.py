@@ -1,20 +1,20 @@
 import os
 import sys
 VERSION = "0.2.0"
-from core.model import ArchitectureModel
-from adapters.python_adapter import PythonParser
-from export.graphviz import export_graphviz
-from export.json_export import export_json
-from analysis.cycles import detect_cycles
-from analysis.health import compute_health
-from analysis.metrics import compute_metrics
-from analysis.impact import ImpactAnalyzer
-from analysis.risk import RiskEngine
-from analysis.top_risk import TopRiskAnalyzer
-from engine.analysis_engine import AnalysisEngine
-from engine.insight_builder import InsightBuilder
-from report.html_report import generate_html_report
-from analysis.visualize import generate_visual
+from soft_archmap.core.model import ArchitectureModel
+from soft_archmap.adapters.python_adapter import PythonParser
+from soft_archmap.export.graphviz import export_graphviz
+from soft_archmap.export.json_export import export_json
+from soft_archmap.analysis.cycles import detect_cycles
+from soft_archmap.analysis.health import compute_health
+from soft_archmap.analysis.metrics import compute_metrics
+from soft_archmap.analysis.impact import ImpactAnalyzer
+from soft_archmap.analysis.risk import RiskEngine
+from soft_archmap.analysis.top_risk import TopRiskAnalyzer
+from soft_archmap.engine.analysis_engine import AnalysisEngine
+from soft_archmap.engine.insight_builder import InsightBuilder
+from soft_archmap.report.html_report import generate_html_report
+from soft_archmap.analysis.visualize import generate_visual
 
 class CLI:
     def __init__(self):
