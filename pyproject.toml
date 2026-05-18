@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "soft-archmap"          # must be lowercase, use '-' not '_'
-version = "0.2.1"
+version = "0.2.2"
 description = "Python tool to analyze architecture and dependencies in Python projects."
 readme = "README.md"             # include README on PyPI
 requires-python = ">=3.10"
