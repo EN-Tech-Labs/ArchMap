@@ -1,2 +1,0 @@
-[console_scripts]
-soft-archmap = soft_archmap.cli:main
