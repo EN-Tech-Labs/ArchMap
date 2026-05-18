@@ -1,11 +1,6 @@
-from collections import defaultdict, deque
-from soft_archmap.core.graph import DependencyGraph
-
 class ImpactAnalyzer:
     def __init__(self, model):
-        # Build a dependency graph from the model
-        self.graph = DependencyGraph()
-        self.graph.build_from_model(model)
+        self.graph = model.graph
 
     def analyze(self, target):
         visited = set()
@@ -19,4 +14,9 @@ class ImpactAnalyzer:
                     dfs(dep)
 
         dfs(target)
-        return result
+
+        return {
+            "target": target,
+            "impact_count": len(result),
+            "impacted_nodes": result
+        }

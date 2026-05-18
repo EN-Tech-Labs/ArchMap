@@ -1,17 +1,20 @@
 import os
 import sys
-VERSION = "0.1.2"
-from soft_archmap.core.model import ArchitectureModel
-from soft_archmap.adapters.python_adapter import PythonParser
-from soft_archmap.export.graphviz import export_graphviz
-from soft_archmap.export.json_export import export_json
-from soft_archmap.analysis.cycles import detect_cycles
-from soft_archmap.analysis.health import compute_health
-from soft_archmap.analysis.metrics import compute_metrics
-from soft_archmap.analysis.impact import ImpactAnalyzer
-from soft_archmap.analysis.risk import RiskEngine
-from soft_archmap.analysis.top_risk import TopRiskAnalyzer
-
+VERSION = "0.2.0"
+from core.model import ArchitectureModel
+from adapters.python_adapter import PythonParser
+from export.graphviz import export_graphviz
+from export.json_export import export_json
+from analysis.cycles import detect_cycles
+from analysis.health import compute_health
+from analysis.metrics import compute_metrics
+from analysis.impact import ImpactAnalyzer
+from analysis.risk import RiskEngine
+from analysis.top_risk import TopRiskAnalyzer
+from engine.analysis_engine import AnalysisEngine
+from engine.insight_builder import InsightBuilder
+from report.html_report import generate_html_report
+from analysis.visualize import generate_visual
 
 class CLI:
     def __init__(self):
@@ -110,19 +113,67 @@ class CLI:
     def analyze(self):
         print(f"Analyzing repo: {self.input_repo}")
 
+        # 1️⃣ Get output directory and create subfolders
         output_dir = self.get_output_dir()
+        os.makedirs(output_dir, exist_ok=True)
 
-        json_path = os.path.join(output_dir, "architecture.json")
-        dot_path = os.path.join(output_dir, "architecture.dot")
+        report_dir = os.path.join(output_dir, "reports")
+        os.makedirs(report_dir, exist_ok=True)
 
-        export_json(self.model, json_path)
-        export_graphviz(self.model, dot_path)
+        # 2️⃣ Run analysis engine
+        engine = AnalysisEngine(self.model)
+        analysis = engine.run()  # should include health, cycles, top_risk, etc.
 
-        print("\n--- ANALYSIS COMPLETE ---")
-        print("Cycles:", detect_cycles(self.model))
-        print("Health:", compute_health(self.model))
-        print("Metrics:", compute_metrics(self.model))
-        print("Analysis complete.")
+        # 3️⃣ Build insights
+        insight_builder = InsightBuilder(
+            self.model,
+            self.graph,
+            analysis
+        )
+        insights = insight_builder.build()
+        analysis['insights'] = insights["insights"]
+
+        # 4️⃣ Export JSON & DOT
+        export_json(self.model, os.path.join(report_dir, "architecture.json"))
+        export_graphviz(self.model, os.path.join(report_dir, "architecture.dot"))
+
+        # 5️⃣ Print insights (CLI UX)
+        print("\n--- 🔴 INSIGHTS ---")
+        for i in analysis['insights'][:10]:
+            print(f"\n[{i['severity']}] {i['node']}")
+            for r in i["reasons"]:
+                print(f"  - {r}")
+
+        # 6️⃣ Summary
+        print("\n--- SUMMARY ---")
+        print(f"Health: {analysis['health']}")
+        print(f"Cycles: {len(analysis['cycles'])}")
+        print(f"Top Risk Nodes: {analysis['top_risk']['top_risk'][:3]}")
+
+        # 7️⃣ Generate visualization
+        svg_path = os.path.join(report_dir, "architecture.svg")
+        png_path = os.path.join(report_dir, "architecture.png")
+        try:
+            generate_visual(self.model, report_dir)
+            print(f"SVG architecture visualization saved: {svg_path}")
+        except Exception as e:
+            print("Graphviz not found or error generating SVG. PNG fallback will be used.")
+            generate_visual(self.model, report_dir, output_format="png")
+            print(f"PNG architecture visualization saved: {png_path}")
+
+        # 8️⃣ Generate HTML report
+        html_path = os.path.join(report_dir, "report.html")
+        try:
+            generate_html_report(
+                model=self.model,
+                graph=self.graph,
+                analysis=analysis,
+                output_dir=report_dir,
+                svg_path=svg_path  # optional: pass SVG to embed in HTML
+            )
+            print(f"HTML report generated: {html_path}")
+        except PermissionError:
+            print(f"Permission denied writing HTML report at {html_path}. Try closing any open report or use another folder.")
 
     def impact(self):
         if not self.target:
@@ -137,12 +188,16 @@ class CLI:
         analyzer = ImpactAnalyzer(self.model)
         result = []
         for t in targets:
-            result.extend(analyzer.analyze(t))
-
+            impact_result = analyzer.analyze(t)  # assuming this returns a dict
+            if isinstance(impact_result, dict) and "impacted_nodes" in impact_result:
+                result.extend(impact_result["impacted_nodes"])
+            else:
+                result.extend(impact_result)  # fallback if it's a list
+        
         # Remove duplicates
         result = list(set(result))
-        result.sort(key=lambda x: ("module" in x, "class" in x, "function" in x))
-
+        result.sort()  # simple sort; modify if you want custom key
+        
         print("\n--- IMPACT RESULT ---")
         print({
             "target": self.target,
