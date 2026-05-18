@@ -1,6 +1,6 @@
 import os
 import sys
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 from soft_archmap.core.model import ArchitectureModel
 from soft_archmap.adapters.python_adapter import PythonParser
 from soft_archmap.export.graphviz import export_graphviz
