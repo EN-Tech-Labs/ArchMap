@@ -4,10 +4,10 @@ Soft ArchMap is a CLI tool by **Excited Nuclei Tech Labs** for analyzing Python 
 
 ## Sample Images from report
 ### HTML Report Header
-![Report Head Image](readme\Images\image.png)
+![Report Head Image](readme/Images/image.png)
 
 ### HTML Report Table
-![Report table](readme\Images\image_1.png)
+![Report table](readme/Images/image_1.png)
 
 ## Features
 
